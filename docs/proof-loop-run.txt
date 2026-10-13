@@ -1,0 +1,356 @@
+﻿.\.venv\Scripts\python.exe : 20:09:34 INFO    
+==============================================================================
+At line:1 char:330
++ ... urple-loop; .\.venv\Scripts\python.exe -m purpleloop run --rounds 20  ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (20:09:34 INFO  ...===============:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+20:09:34 INFO    ROUND 0  bootstrap: hand-authored seed variants
+20:09:34 WARNING round event cap 6000 hit (6476 events): keeping 252/280 benign sessions
+20:09:35 INFO    round 0 corpus: 276 sessions (24 attack across 6 seed variants, 252 benign)
+20:09:38 INFO    round 0 -> v1 promoted | threshold 0.3409 | benign FPR 0.0100 | suite recall 1.000
+20:09:38 INFO    top features: log_duration_s, duration_s, iat_max, iat_mean, iat_median, logcount_recon
+20:09:38 INFO    ==============================================================================
+20:09:38 INFO    ROUND 1  cloudtrail_tampering
+20:09:38 INFO      policy: round 1 <= seed_rounds; exploring the knob space uniformly
+20:09:38 INFO      variant: delay_profile=slow,batch_size=medium,call_order=split,identity_reuse=two_identities
+20:09:38 INFO      HELD OUT: caught 0/8 sessions -> recall 0.000 (mean score 0.123, thr 0.341)
+20:09:38 INFO      active version FPR on this round's fresh benign: 0.0143
+20:09:42 INFO      suite (6 variants): recall active 1.000 -> candidate 1.000 | benign FPR active 0.0050 -> candidate 
+0.0088
+20:09:42 INFO      gate: PROMOTED v2 -- no regression on either axis (suite recall 1.000 -> 1.000, suite FPR 0.0050 -> 
+0.0088, calibrated FPR 0.0100)
+20:09:42 INFO    ==============================================================================
+20:09:42 INFO    ROUND 2  iam_escalation
+20:09:42 INFO      policy: round 2 <= seed_rounds; exploring the knob space uniformly
+20:09:42 INFO      variant: delay_profile=fast,batch_size=large,call_order=split,identity_reuse=per_call_identity
+20:09:42 INFO      HELD OUT: caught 8/8 sessions -> recall 1.000 (mean score 0.645, thr 0.143)
+20:09:42 INFO      active version FPR on this round's fresh benign: 0.0143
+20:09:45 INFO      suite (7 variants): recall active 1.000 -> candidate 1.000 | benign FPR active 0.0088 -> candidate 
+0.0050
+20:09:45 INFO      gate: PROMOTED v3 -- no regression on either axis (suite recall 1.000 -> 1.000, suite FPR 0.0088 -> 
+0.0050, calibrated FPR 0.0100)
+20:09:45 INFO    ==============================================================================
+20:09:46 INFO    ROUND 3  s3_exfiltration
+20:09:46 INFO      policy: biasing toward delay_profile=slow because misses cluster there (100% of sessions missed 
+over 1 round)
+20:09:46 INFO      variant: delay_profile=fast,batch_size=small,call_order=reversed,identity_reuse=single
+20:09:46 INFO      HELD OUT: caught 8/8 sessions -> recall 1.000 (mean score 0.435, thr 0.124)
+20:09:46 INFO      active version FPR on this round's fresh benign: 0.0214
+20:09:49 INFO      suite (8 variants): recall active 1.000 -> candidate 1.000 | benign FPR active 0.0088 -> candidate 
+0.0138
+20:09:49 INFO      gate: PROMOTED v4 -- no regression on either axis (suite recall 1.000 -> 1.000, suite FPR 0.0088 -> 
+0.0138, calibrated FPR 0.0100)
+20:09:49 INFO    ==============================================================================
+20:09:50 INFO    ROUND 4  s3_exfiltration
+20:09:50 INFO      policy: biasing toward delay_profile=slow because misses cluster there (100% of sessions missed 
+over 1 round)
+20:09:50 INFO      variant: delay_profile=slow,batch_size=large,call_order=interleaved,identity_reuse=two_identities
+20:09:50 INFO      HELD OUT: caught 8/8 sessions -> recall 1.000 (mean score 0.672, thr 0.162)
+20:09:50 INFO      active version FPR on this round's fresh benign: 0.0143
+20:09:53 INFO      suite (9 variants): recall active 1.000 -> candidate 1.000 | benign FPR active 0.0200 -> candidate 
+0.0075
+20:09:53 INFO      gate: PROMOTED v5 -- no regression on either axis (suite recall 1.000 -> 1.000, suite FPR 0.0200 -> 
+0.0075, calibrated FPR 0.0100)
+20:09:53 INFO    ==============================================================================
+20:09:53 INFO    ROUND 5  s3_exfiltration
+20:09:53 INFO      policy: biasing toward batch_size=medium because misses cluster there (100% of sessions missed over 
+1 round)
+20:09:53 INFO      variant: delay_profile=jittered,batch_size=medium,call_order=canonical,identity_reuse=two_identities
+20:09:54 INFO      HELD OUT: caught 8/8 sessions -> recall 1.000 (mean score 0.662, thr 0.268)
+20:09:54 INFO      active version FPR on this round's fresh benign: 0.0071
+20:09:57 INFO      suite (10 variants): recall active 1.000 -> candidate 1.000 | benign FPR active 0.0075 -> candidate 
+0.0088
+20:09:57 INFO      gate: PROMOTED v6 -- no regression on either axis (suite recall 1.000 -> 1.000, suite FPR 0.0075 -> 
+0.0088, calibrated FPR 0.0100)
+20:09:57 INFO    ==============================================================================
+20:09:57 INFO    ROUND 6  iam_escalation
+20:09:57 INFO      policy: biasing toward delay_profile=slow because misses cluster there (50% of sessions missed over 
+2 rounds)
+20:09:57 INFO      variant: delay_profile=slow,batch_size=small,call_order=canonical,identity_reuse=per_call_identity
+20:09:58 INFO      HELD OUT: caught 8/8 sessions -> recall 1.000 (mean score 0.723, thr 0.123)
+20:09:58 INFO      active version FPR on this round's fresh benign: 0.0214
+20:10:01 INFO      suite (11 variants): recall active 1.000 -> candidate 1.000 | benign FPR active 0.0125 -> candidate 
+0.0100
+20:10:01 INFO      gate: PROMOTED v7 -- no regression on either axis (suite recall 1.000 -> 1.000, suite FPR 0.0125 -> 
+0.0100, calibrated FPR 0.0100)
+20:10:01 INFO    ==============================================================================
+20:10:01 INFO    ROUND 7  iam_escalation
+20:10:01 INFO      policy: biasing toward batch_size=medium because misses cluster there (50% of sessions missed over 
+2 rounds)
+20:10:01 INFO      variant: delay_profile=fast,batch_size=medium,call_order=canonical,identity_reuse=two_identities
+20:10:02 INFO      HELD OUT: caught 8/8 sessions -> recall 1.000 (mean score 0.962, thr 0.110)
+20:10:02 INFO      active version FPR on this round's fresh benign: 0.0071
+20:10:05 INFO      suite (12 variants): recall active 1.000 -> candidate 1.000 | benign FPR active 0.0100 -> candidate 
+0.0075
+20:10:05 INFO      gate: PROMOTED v8 -- no regression on either axis (suite recall 1.000 -> 1.000, suite FPR 0.0100 -> 
+0.0075, calibrated FPR 0.0100)
+20:10:07 INFO      governance test v9: threshold 0.0148 would reach suite recall 1.000 at benign FPR 0.1000 -> REJECTED
+20:10:07 INFO    ==============================================================================
+20:10:07 INFO    ROUND 8  cloudtrail_tampering
+20:10:07 INFO      policy: biasing toward call_order=split because misses cluster there (50% of sessions missed over 2 
+rounds)
+20:10:07 INFO      variant: delay_profile=spaced,batch_size=medium,call_order=split,identity_reuse=single
+20:10:07 INFO      HELD OUT: caught 8/8 sessions -> recall 1.000 (mean score 0.614, thr 0.104)
+20:10:07 INFO      active version FPR on this round's fresh benign: 0.0143
+20:10:11 INFO      suite (13 variants): recall active 1.000 -> candidate 1.000 | benign FPR active 0.0150 -> candidate 
+0.0187
+20:10:11 INFO      gate: PROMOTED v10 -- no regression on either axis (suite recall 1.000 -> 1.000, suite FPR 0.0150 
+-> 0.0187, calibrated FPR 0.0100)
+20:10:11 INFO    ==============================================================================
+20:10:11 INFO    ROUND 9  iam_escalation
+20:10:11 INFO      policy: biasing toward delay_profile=slow because misses cluster there (33% of sessions missed over 
+3 rounds)
+20:10:11 INFO      variant: delay_profile=spaced,batch_size=large,call_order=reversed,identity_reuse=single
+20:10:11 INFO      HELD OUT: caught 8/8 sessions -> recall 1.000 (mean score 0.891, thr 0.066)
+20:10:11 INFO      active version FPR on this round's fresh benign: 0.0357
+20:10:14 INFO      suite (14 variants): recall active 1.000 -> candidate 1.000 | benign FPR active 0.0125 -> candidate 
+0.0112
+20:10:15 INFO      gate: PROMOTED v11 -- no regression on either axis (suite recall 1.000 -> 1.000, suite FPR 0.0125 
+-> 0.0112, calibrated FPR 0.0100)
+20:10:15 INFO    ==============================================================================
+20:10:15 INFO    ROUND 10  iam_escalation
+20:10:15 INFO      policy: biasing toward delay_profile=slow because misses cluster there (33% of sessions missed over 
+3 rounds)
+20:10:15 INFO      variant: delay_profile=slow,batch_size=small,call_order=split,identity_reuse=two_identities
+20:10:15 INFO      HELD OUT: caught 8/8 sessions -> recall 1.000 (mean score 0.947, thr 0.092)
+20:10:15 INFO      active version FPR on this round's fresh benign: 0.0000
+20:10:18 INFO      suite (15 variants): recall active 1.000 -> candidate 1.000 | benign FPR active 0.0100 -> candidate 
+0.0075
+20:10:18 INFO      gate: PROMOTED v12 -- no regression on either axis (suite recall 1.000 -> 1.000, suite FPR 0.0100 
+-> 0.0075, calibrated FPR 0.0100)
+20:10:18 INFO    ==============================================================================
+20:10:18 INFO    ROUND 11  s3_exfiltration
+20:10:18 INFO      policy: biasing toward delay_profile=slow because misses cluster there (25% of sessions missed over 
+4 rounds)
+20:10:18 INFO      variant: delay_profile=slow,batch_size=medium,call_order=reversed,identity_reuse=two_identities
+20:10:19 INFO      HELD OUT: caught 8/8 sessions -> recall 1.000 (mean score 0.680, thr 0.105)
+20:10:19 INFO      active version FPR on this round's fresh benign: 0.0143
+20:10:22 INFO      suite (16 variants): recall active 1.000 -> candidate 1.000 | benign FPR active 0.0125 -> candidate 
+0.0112
+20:10:22 INFO      gate: PROMOTED v13 -- no regression on either axis (suite recall 1.000 -> 1.000, suite FPR 0.0125 
+-> 0.0112, calibrated FPR 0.0100)
+20:10:22 INFO    ==============================================================================
+20:10:22 INFO    ROUND 12  s3_exfiltration
+20:10:22 INFO      policy: biasing toward call_order=split because misses cluster there (25% of sessions missed over 4 
+rounds)
+20:10:22 INFO      variant: delay_profile=burst,batch_size=large,call_order=split,identity_reuse=two_identities
+20:10:23 INFO      HELD OUT: caught 8/8 sessions -> recall 1.000 (mean score 0.950, thr 0.098)
+20:10:23 INFO      active version FPR on this round's fresh benign: 0.0000
+20:10:26 INFO      suite (17 variants): recall active 1.000 -> candidate 1.000 | benign FPR active 0.0063 -> candidate 
+0.0075
+20:10:26 INFO      gate: PROMOTED v14 -- no regression on either axis (suite recall 1.000 -> 1.000, suite FPR 0.0063 
+-> 0.0075, calibrated FPR 0.0100)
+20:10:26 INFO    ==============================================================================
+20:10:26 INFO    ROUND 13  s3_exfiltration
+20:10:26 INFO      policy: biasing toward delay_profile=slow because misses cluster there (20% of sessions missed over 
+5 rounds)
+20:10:26 INFO      variant: delay_profile=burst,batch_size=large,call_order=canonical,identity_reuse=two_identities
+20:10:26 INFO      HELD OUT: caught 8/8 sessions -> recall 1.000 (mean score 0.932, thr 0.081)
+20:10:26 INFO      active version FPR on this round's fresh benign: 0.0143
+20:10:30 INFO      suite (18 variants): recall active 1.000 -> candidate 1.000 | benign FPR active 0.0225 -> candidate 
+0.0163
+20:10:30 INFO      gate: PROMOTED v15 -- no regression on either axis (suite recall 1.000 -> 1.000, suite FPR 0.0225 
+-> 0.0163, calibrated FPR 0.0100)
+20:10:30 INFO    ==============================================================================
+20:10:30 INFO    ROUND 14  cloudtrail_tampering
+20:10:30 INFO      policy: biasing toward delay_profile=slow because misses cluster there (20% of sessions missed over 
+5 rounds)
+20:10:30 INFO      variant: delay_profile=slow,batch_size=large,call_order=interleaved,identity_reuse=two_identities
+20:10:30 INFO      HELD OUT: caught 8/8 sessions -> recall 1.000 (mean score 0.989, thr 0.075)
+20:10:30 INFO      active version FPR on this round's fresh benign: 0.0071
+20:10:34 INFO      suite (19 variants): recall active 1.000 -> candidate 1.000 | benign FPR active 0.0112 -> candidate 
+0.0025
+20:10:34 INFO      gate: PROMOTED v16 -- no regression on either axis (suite recall 1.000 -> 1.000, suite FPR 0.0112 
+-> 0.0025, calibrated FPR 0.0100)
+20:10:34 INFO    ==============================================================================
+20:10:34 INFO    ROUND 15  iam_escalation
+20:10:34 INFO      policy: biasing toward batch_size=medium because misses cluster there (20% of sessions missed over 
+5 rounds)
+20:10:34 INFO      variant: delay_profile=spaced,batch_size=medium,call_order=split,identity_reuse=per_call_identity
+20:10:34 INFO      HELD OUT: caught 8/8 sessions -> recall 1.000 (mean score 0.969, thr 0.114)
+20:10:34 INFO      active version FPR on this round's fresh benign: 0.0071
+20:10:38 INFO      suite (20 variants): recall active 1.000 -> candidate 1.000 | benign FPR active 0.0088 -> candidate 
+0.0100
+20:10:38 INFO      gate: PROMOTED v17 -- no regression on either axis (suite recall 1.000 -> 1.000, suite FPR 0.0088 
+-> 0.0100, calibrated FPR 0.0100)
+20:10:38 INFO    ==============================================================================
+20:10:38 INFO    ROUND 16  cloudtrail_tampering
+20:10:38 INFO      policy: biasing toward delay_profile=slow because misses cluster there (17% of sessions missed over 
+6 rounds)
+20:10:38 INFO      variant: delay_profile=slow,batch_size=medium,call_order=canonical,identity_reuse=per_call_identity
+20:10:38 INFO      HELD OUT: caught 8/8 sessions -> recall 1.000 (mean score 0.825, thr 0.103)
+20:10:38 INFO      active version FPR on this round's fresh benign: 0.0214
+20:10:42 INFO      suite (21 variants): recall active 1.000 -> candidate 1.000 | benign FPR active 0.0100 -> candidate 
+0.0138
+20:10:42 INFO      gate: PROMOTED v18 -- no regression on either axis (suite recall 1.000 -> 1.000, suite FPR 0.0100 
+-> 0.0138, calibrated FPR 0.0100)
+20:10:42 INFO    ==============================================================================
+20:10:42 INFO    ROUND 17  s3_exfiltration
+20:10:42 INFO      policy: biasing toward call_order=split because misses cluster there (17% of sessions missed over 6 
+rounds)
+20:10:42 INFO      variant: delay_profile=fast,batch_size=large,call_order=split,identity_reuse=two_identities
+20:10:42 INFO      HELD OUT: caught 8/8 sessions -> recall 1.000 (mean score 0.972, thr 0.057)
+20:10:42 INFO      active version FPR on this round's fresh benign: 0.0000
+20:10:46 INFO      suite (22 variants): recall active 1.000 -> candidate 1.000 | benign FPR active 0.0100 -> candidate 
+0.0063
+20:10:46 INFO      gate: PROMOTED v19 -- no regression on either axis (suite recall 1.000 -> 1.000, suite FPR 0.0100 
+-> 0.0063, calibrated FPR 0.0100)
+20:10:46 INFO    ==============================================================================
+20:10:46 INFO    ROUND 18  s3_exfiltration
+20:10:46 INFO      policy: biasing toward delay_profile=slow because misses cluster there (14% of sessions missed over 
+7 rounds)
+20:10:46 INFO      variant: delay_profile=slow,batch_size=large,call_order=interleaved,identity_reuse=per_call_identity
+20:10:46 INFO      HELD OUT: caught 8/8 sessions -> recall 1.000 (mean score 0.999, thr 0.080)
+20:10:46 INFO      active version FPR on this round's fresh benign: 0.0000
+20:10:50 INFO      suite (23 variants): recall active 1.000 -> candidate 1.000 | benign FPR active 0.0063 -> candidate 
+0.0112
+20:10:50 INFO      gate: PROMOTED v20 -- no regression on either axis (suite recall 1.000 -> 1.000, suite FPR 0.0063 
+-> 0.0112, calibrated FPR 0.0100)
+20:10:50 INFO    ==============================================================================
+20:10:50 INFO    ROUND 19  s3_exfiltration
+20:10:50 INFO      policy: biasing toward batch_size=medium because misses cluster there (14% of sessions missed over 
+7 rounds)
+20:10:50 INFO      variant: delay_profile=burst,batch_size=medium,call_order=interleaved,identity_reuse=single
+20:10:50 INFO      HELD OUT: caught 8/8 sessions -> recall 1.000 (mean score 0.891, thr 0.073)
+20:10:50 INFO      active version FPR on this round's fresh benign: 0.0000
+20:10:54 INFO      suite (24 variants): recall active 1.000 -> candidate 1.000 | benign FPR active 0.0075 -> candidate 
+0.0100
+20:10:54 INFO      gate: PROMOTED v21 -- no regression on either axis (suite recall 1.000 -> 1.000, suite FPR 0.0075 
+-> 0.0100, calibrated FPR 0.0100)
+20:10:54 INFO    ==============================================================================
+20:10:54 INFO    ROUND 20  iam_escalation
+20:10:54 INFO      policy: biasing toward call_order=split because misses cluster there (14% of sessions missed over 7 
+rounds)
+20:10:54 INFO      variant: delay_profile=spaced,batch_size=small,call_order=split,identity_reuse=single
+20:10:54 INFO      HELD OUT: caught 8/8 sessions -> recall 1.000 (mean score 0.916, thr 0.055)
+20:10:54 INFO      active version FPR on this round's fresh benign: 0.0214
+20:10:58 INFO      suite (25 variants): recall active 1.000 -> candidate 1.000 | benign FPR active 0.0100 -> candidate 
+0.0125
+20:10:58 INFO      gate: PROMOTED v22 -- no regression on either axis (suite recall 1.000 -> 1.000, suite FPR 0.0100 
+-> 0.0125, calibrated FPR 0.0100)
+20:10:58 INFO    ==============================================================================
+20:10:58 INFO    loop finished; 20 rounds in the corpus
+20:10:58 INFO      v1   round 0   [bootstrap] promoted  ok       held_out_recall=   n/a suite_recall= 1.000 
+benign_fpr= 0.010 :: first version: suite recall 1.000 at calibrated benign FPR 0.0100, within budget
+20:10:58 INFO      v2   round 1   [retrained] promoted  ok       held_out_recall= 0.000 suite_recall= 1.000 
+benign_fpr= 0.010 :: no regression on either axis (suite recall 1.000 -> 1.000, suite FPR 0.0050 -> 0.0088, calibrated 
+FPR 0.0100)
+20:10:58 INFO      v3   round 2   [retrained] promoted  ok       held_out_recall= 1.000 suite_recall= 1.000 
+benign_fpr= 0.010 :: no regression on either axis (suite recall 1.000 -> 1.000, suite FPR 0.0088 -> 0.0050, calibrated 
+FPR 0.0100)
+20:10:58 INFO      v4   round 3   [retrained] promoted  ok       held_out_recall= 1.000 suite_recall= 1.000 
+benign_fpr= 0.010 :: no regression on either axis (suite recall 1.000 -> 1.000, suite FPR 0.0088 -> 0.0138, calibrated 
+FPR 0.0100)
+20:10:58 INFO      v5   round 4   [retrained] promoted  ok       held_out_recall= 1.000 suite_recall= 1.000 
+benign_fpr= 0.010 :: no regression on either axis (suite recall 1.000 -> 1.000, suite FPR 0.0200 -> 0.0075, calibrated 
+FPR 0.0100)
+20:10:58 INFO      v6   round 5   [retrained] promoted  ok       held_out_recall= 1.000 suite_recall= 1.000 
+benign_fpr= 0.010 :: no regression on either axis (suite recall 1.000 -> 1.000, suite FPR 0.0075 -> 0.0088, calibrated 
+FPR 0.0100)
+20:10:58 INFO      v7   round 6   [retrained] promoted  ok       held_out_recall= 1.000 suite_recall= 1.000 
+benign_fpr= 0.010 :: no regression on either axis (suite recall 1.000 -> 1.000, suite FPR 0.0125 -> 0.0100, calibrated 
+FPR 0.0100)
+20:10:58 INFO      v8   round 7   [retrained] promoted  ok       held_out_recall= 1.000 suite_recall= 1.000 
+benign_fpr= 0.010 :: no regression on either axis (suite recall 1.000 -> 1.000, suite FPR 0.0100 -> 0.0075, calibrated 
+FPR 0.0100)
+20:10:58 INFO      v9   round 7   [aggressive_threshold] rejected  REJECTED held_out_recall=   n/a suite_recall= 1.000 
+benign_fpr= 0.100 :: governance test (10x FPR budget): calibrated benign FPR 0.1000 breaches the 0.0100 budget 
+(+0.0020 slack); active version kept
+20:10:58 INFO      v10  round 8   [retrained] promoted  ok       held_out_recall= 1.000 suite_recall= 1.000 
+benign_fpr= 0.010 :: no regression on either axis (suite recall 1.000 -> 1.000, suite FPR 0.0150 -> 0.0187, calibrated 
+FPR 0.0100)
+20:10:58 INFO      v11  round 9   [retrained] promoted  ok       held_out_recall= 1.000 suite_recall= 1.000 
+benign_fpr= 0.010 :: no regression on either axis (suite recall 1.000 -> 1.000, suite FPR 0.0125 -> 0.0112, calibrated 
+FPR 0.0100)
+20:10:58 INFO      v12  round 10  [retrained] promoted  ok       held_out_recall= 1.000 suite_recall= 1.000 
+benign_fpr= 0.010 :: no regression on either axis (suite recall 1.000 -> 1.000, suite FPR 0.0100 -> 0.0075, calibrated 
+FPR 0.0100)
+20:10:58 INFO      v13  round 11  [retrained] promoted  ok       held_out_recall= 1.000 suite_recall= 1.000 
+benign_fpr= 0.010 :: no regression on either axis (suite recall 1.000 -> 1.000, suite FPR 0.0125 -> 0.0112, calibrated 
+FPR 0.0100)
+20:10:58 INFO      v14  round 12  [retrained] promoted  ok       held_out_recall= 1.000 suite_recall= 1.000 
+benign_fpr= 0.010 :: no regression on either axis (suite recall 1.000 -> 1.000, suite FPR 0.0063 -> 0.0075, calibrated 
+FPR 0.0100)
+20:10:58 INFO      v15  round 13  [retrained] promoted  ok       held_out_recall= 1.000 suite_recall= 1.000 
+benign_fpr= 0.010 :: no regression on either axis (suite recall 1.000 -> 1.000, suite FPR 0.0225 -> 0.0163, calibrated 
+FPR 0.0100)
+20:10:58 INFO      v16  round 14  [retrained] promoted  ok       held_out_recall= 1.000 suite_recall= 1.000 
+benign_fpr= 0.010 :: no regression on either axis (suite recall 1.000 -> 1.000, suite FPR 0.0112 -> 0.0025, calibrated 
+FPR 0.0100)
+20:10:58 INFO      v17  round 15  [retrained] promoted  ok       held_out_recall= 1.000 suite_recall= 1.000 
+benign_fpr= 0.010 :: no regression on either axis (suite recall 1.000 -> 1.000, suite FPR 0.0088 -> 0.0100, calibrated 
+FPR 0.0100)
+20:10:58 INFO      v18  round 16  [retrained] promoted  ok       held_out_recall= 1.000 suite_recall= 1.000 
+benign_fpr= 0.010 :: no regression on either axis (suite recall 1.000 -> 1.000, suite FPR 0.0100 -> 0.0138, calibrated 
+FPR 0.0100)
+20:10:58 INFO      v19  round 17  [retrained] promoted  ok       held_out_recall= 1.000 suite_recall= 1.000 
+benign_fpr= 0.010 :: no regression on either axis (suite recall 1.000 -> 1.000, suite FPR 0.0100 -> 0.0063, calibrated 
+FPR 0.0100)
+20:10:58 INFO      v20  round 18  [retrained] promoted  ok       held_out_recall= 1.000 suite_recall= 1.000 
+benign_fpr= 0.010 :: no regression on either axis (suite recall 1.000 -> 1.000, suite FPR 0.0063 -> 0.0112, calibrated 
+FPR 0.0100)
+20:10:58 INFO      v21  round 19  [retrained] promoted  ok       held_out_recall= 1.000 suite_recall= 1.000 
+benign_fpr= 0.010 :: no regression on either axis (suite recall 1.000 -> 1.000, suite FPR 0.0075 -> 0.0100, calibrated 
+FPR 0.0100)
+20:10:58 INFO      v22  round 20  [retrained] promoted  ACTIVE   held_out_recall= 1.000 suite_recall= 1.000 
+benign_fpr= 0.010 :: no regression on either axis (suite recall 1.000 -> 1.000, suite FPR 0.0100 -> 0.0125, calibrated 
+FPR 0.0100)
+
+========================================================================
+PURPLE LOOP RESULTS
+========================================================================
+rounds scored held-out        : 20
+mean held-out recall, first 5 : 0.800
+mean held-out recall, last 5  : 1.000
+benign FPR  mean / max        : 0.0100 / 0.0100
+candidates promoted / rejected: 20 / 0
+figures                       : E:\Projects\purple-loop\docs\figures
+
+ round               family delay_profile  call_order  held_out_recall  benign_fpr decision
+     1 cloudtrail_tampering          slow       split              0.0        0.01 promoted
+     2       iam_escalation          fast       split              1.0        0.01 promoted
+     3      s3_exfiltration          fast    reversed              1.0        0.01 promoted
+     4      s3_exfiltration          slow interleaved              1.0        0.01 promoted
+     5      s3_exfiltration      jittered   canonical              1.0        0.01 promoted
+     6       iam_escalation          slow   canonical              1.0        0.01 promoted
+     7       iam_escalation          fast   canonical              1.0        0.01 promoted
+     8 cloudtrail_tampering        spaced       split              1.0        0.01 promoted
+     9       iam_escalation        spaced    reversed              1.0        0.01 promoted
+    10       iam_escalation          slow       split              1.0        0.01 promoted
+    11      s3_exfiltration          slow    reversed              1.0        0.01 promoted
+    12      s3_exfiltration         burst       split              1.0        0.01 promoted
+    13      s3_exfiltration         burst   canonical              1.0        0.01 promoted
+    14 cloudtrail_tampering          slow interleaved              1.0        0.01 promoted
+    15       iam_escalation        spaced       split              1.0        0.01 promoted
+    16 cloudtrail_tampering          slow   canonical              1.0        0.01 promoted
+    17      s3_exfiltration          fast       split              1.0        0.01 promoted
+    18      s3_exfiltration          slow interleaved              1.0        0.01 promoted
+    19      s3_exfiltration         burst interleaved              1.0        0.01 promoted
+    20       iam_escalation        spaced       split              1.0        0.01 promoted
+
+registry audit trail
+------------------------------------------------------------------------
+  v1   round 0   [bootstrap] promoted  ok       held_out_recall=   n/a suite_recall= 1.000 benign_fpr= 0.010 :: first version: suite recall 1.000 at calibrated benign FPR 0.0100, within budget
+  v2   round 1   [retrained] promoted  ok       held_out_recall= 0.000 suite_recall= 1.000 benign_fpr= 0.010 :: no regression on either axis (suite recall 1.000 -> 1.000, suite FPR 0.0050 -> 0.0088, calibrated FPR 0.0100)
+  v3   round 2   [retrained] promoted  ok       held_out_recall= 1.000 suite_recall= 1.000 benign_fpr= 0.010 :: no regression on either axis (suite recall 1.000 -> 1.000, suite FPR 0.0088 -> 0.0050, calibrated FPR 0.0100)
+  v4   round 3   [retrained] promoted  ok       held_out_recall= 1.000 suite_recall= 1.000 benign_fpr= 0.010 :: no regression on either axis (suite recall 1.000 -> 1.000, suite FPR 0.0088 -> 0.0138, calibrated FPR 0.0100)
+  v5   round 4   [retrained] promoted  ok       held_out_recall= 1.000 suite_recall= 1.000 benign_fpr= 0.010 :: no regression on either axis (suite recall 1.000 -> 1.000, suite FPR 0.0200 -> 0.0075, calibrated FPR 0.0100)
+  v6   round 5   [retrained] promoted  ok       held_out_recall= 1.000 suite_recall= 1.000 benign_fpr= 0.010 :: no regression on either axis (suite recall 1.000 -> 1.000, suite FPR 0.0075 -> 0.0088, calibrated FPR 0.0100)
+  v7   round 6   [retrained] promoted  ok       held_out_recall= 1.000 suite_recall= 1.000 benign_fpr= 0.010 :: no regression on either axis (suite recall 1.000 -> 1.000, suite FPR 0.0125 -> 0.0100, calibrated FPR 0.0100)
+  v8   round 7   [retrained] promoted  ok       held_out_recall= 1.000 suite_recall= 1.000 benign_fpr= 0.010 :: no regression on either axis (suite recall 1.000 -> 1.000, suite FPR 0.0100 -> 0.0075, calibrated FPR 0.0100)
+  v9   round 7   [aggressive_threshold] rejected  REJECTED held_out_recall=   n/a suite_recall= 1.000 benign_fpr= 0.100 :: governance test (10x FPR budget): calibrated benign FPR 0.1000 breaches the 0.0100 budget (+0.0020 slack); active version kept
+  v10  round 8   [retrained] promoted  ok       held_out_recall= 1.000 suite_recall= 1.000 benign_fpr= 0.010 :: no regression on either axis (suite recall 1.000 -> 1.000, suite FPR 0.0150 -> 0.0187, calibrated FPR 0.0100)
+  v11  round 9   [retrained] promoted  ok       held_out_recall= 1.000 suite_recall= 1.000 benign_fpr= 0.010 :: no regression on either axis (suite recall 1.000 -> 1.000, suite FPR 0.0125 -> 0.0112, calibrated FPR 0.0100)
+  v12  round 10  [retrained] promoted  ok       held_out_recall= 1.000 suite_recall= 1.000 benign_fpr= 0.010 :: no regression on either axis (suite recall 1.000 -> 1.000, suite FPR 0.0100 -> 0.0075, calibrated FPR 0.0100)
+  v13  round 11  [retrained] promoted  ok       held_out_recall= 1.000 suite_recall= 1.000 benign_fpr= 0.010 :: no regression on either axis (suite recall 1.000 -> 1.000, suite FPR 0.0125 -> 0.0112, calibrated FPR 0.0100)
+  v14  round 12  [retrained] promoted  ok       held_out_recall= 1.000 suite_recall= 1.000 benign_fpr= 0.010 :: no regression on either axis (suite recall 1.000 -> 1.000, suite FPR 0.0063 -> 0.0075, calibrated FPR 0.0100)
+  v15  round 13  [retrained] promoted  ok       held_out_recall= 1.000 suite_recall= 1.000 benign_fpr= 0.010 :: no regression on either axis (suite recall 1.000 -> 1.000, suite FPR 0.0225 -> 0.0163, calibrated FPR 0.0100)
+  v16  round 14  [retrained] promoted  ok       held_out_recall= 1.000 suite_recall= 1.000 benign_fpr= 0.010 :: no regression on either axis (suite recall 1.000 -> 1.000, suite FPR 0.0112 -> 0.0025, calibrated FPR 0.0100)
+  v17  round 15  [retrained] promoted  ok       held_out_recall= 1.000 suite_recall= 1.000 benign_fpr= 0.010 :: no regression on either axis (suite recall 1.000 -> 1.000, suite FPR 0.0088 -> 0.0100, calibrated FPR 0.0100)
+  v18  round 16  [retrained] promoted  ok       held_out_recall= 1.000 suite_recall= 1.000 benign_fpr= 0.010 :: no regression on either axis (suite recall 1.000 -> 1.000, suite FPR 0.0100 -> 0.0138, calibrated FPR 0.0100)
+  v19  round 17  [retrained] promoted  ok       held_out_recall= 1.000 suite_recall= 1.000 benign_fpr= 0.010 :: no regression on either axis (suite recall 1.000 -> 1.000, suite FPR 0.0100 -> 0.0063, calibrated FPR 0.0100)
+  v20  round 18  [retrained] promoted  ok       held_out_recall= 1.000 suite_recall= 1.000 benign_fpr= 0.010 :: no regression on either axis (suite recall 1.000 -> 1.000, suite FPR 0.0063 -> 0.0112, calibrated FPR 0.0100)
+  v21  round 19  [retrained] promoted  ok       held_out_recall= 1.000 suite_recall= 1.000 benign_fpr= 0.010 :: no regression on either axis (suite recall 1.000 -> 1.000, suite FPR 0.0075 -> 0.0100, calibrated FPR 0.0100)
+  v22  round 20  [retrained] promoted  ACTIVE   held_out_recall= 1.000 suite_recall= 1.000 benign_fpr= 0.010 :: no regression on either axis (suite recall 1.000 -> 1.000, suite FPR 0.0100 -> 0.0125, calibrated FPR 0.0100)

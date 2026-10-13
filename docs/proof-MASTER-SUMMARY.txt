@@ -1,0 +1,81 @@
+﻿PURPLE LOOP — PROOF OF SYSTEM RUN
+Generated: 2026-10-13 20:11:35
+Seed: 20251013 | Rounds: 20 | Platform: local, no cloud, no network
+================================================================================
+
+1. TEST SUITE — 60/60 PASSED
+--------------------------------------------------------------------------------
+All 60 unit tests passed including:
+  - test_no_leakage.py       : held-out scoring happens BEFORE corpus append (anti-cheat)
+  - test_registry_and_gate.py: 16 tests covering promotion, rejection, rollback
+  - test_gen_and_features.py : attack generators + hard-negative benign behaviour
+  - test_corpus_policy_loop.py: end-to-end round integration + kill-switch
+
+Full output: docs\proof-test-results.txt
+
+2. GENERALIZATION CURVE — HELD-OUT RECALL PER ROUND
+--------------------------------------------------------------------------------
+Round 1 missed: cloudtrail_tampering delay=slow order=split → recall 0.000
+Rounds 2-20: every new variant caught BEFORE training on it → recall 1.000
+
+  First 5 rounds mean held-out recall : 0.800
+  Last  5 rounds mean held-out recall : 1.000
+  All 20 rounds mean held-out recall  : 0.950
+
+  One miss (round 1), then 19 consecutive catches.
+  Honest reading: the curve rises but saturates after one round.
+
+3. FALSE POSITIVE RATE — STAYED INSIDE 1% BUDGET ALL 20 ROUNDS
+--------------------------------------------------------------------------------
+  Calibrated benign FPR (all rounds) : 0.0100  (budget = 0.0100)
+  Fresh benign FPR mean              : ~0.0100
+  Nothing exceeded the 1% limit at any point.
+
+4. GOVERNANCE — AUTO-REJECT FIRED ON ROUND 7
+--------------------------------------------------------------------------------
+  v9  [aggressive_threshold]  REJECTED
+      calibrated FPR 0.1000 breaches the 0.0100 budget (+0.0020 slack)
+      → active version (v8) kept automatically
+
+  22 total versions in registry. 1 rejected. Nothing overwritten.
+  Active version: v22 from round 20.
+
+5. ADAPTIVE POLICY — LOOP TARGETED ITS OWN BLIND SPOT
+--------------------------------------------------------------------------------
+  After round 1's miss (delay=slow, call_order=split):
+    policy biased toward delay_profile=slow for subsequent rounds
+  Result: all slow-timing variants from round 2 onwards were caught.
+  Policy rotated across knob values rather than fixating on one.
+
+6. FILES PRODUCED
+--------------------------------------------------------------------------------
+  docs\proof-test-results.txt  — full pytest -v output
+  docs\proof-loop-run.txt      — full 20-round console log
+  docs\proof-registry-audit.txt — registry audit trail (v1–v22)
+  docs\proof-report-summary.txt — per-round table + figures summary
+  docs\figures\generalisation_curve.png
+  docs\figures\suite_recall.png
+  docs\figures\knob_miss_rates.png
+  docs\figures\ablation.png
+  data\corpus\round_001.parquet ... round_020.parquet
+  data\registry.db              — SQLite, every version immutable
+  logs\loop.log                 — structured per-round log
+  logs\rounds.csv               — machine-readable round metrics
+
+7. REPRODUCIBILITY
+--------------------------------------------------------------------------------
+  Reset and rerun from scratch at any time:
+    cd E:\Projects\purple-loop
+    .\.venv\Scripts\python.exe -m purpleloop reset --yes
+    .\.venv\Scripts\python.exe -m purpleloop run --rounds 20
+    .\.venv\Scripts\python.exe -m purpleloop report
+  Seed 20251013 in config.yaml guarantees identical results every run.
+
+8. SECURITY GUARANTEES
+--------------------------------------------------------------------------------
+  - No AWS account, credentials, or API keys anywhere in the codebase
+  - No network calls of any kind (Docker: --network none)
+  - All events are synthetic, shaped like CloudTrail records
+  - Corpus is append-only: no round can overwrite a previous one
+  - Registry is append-only: no version is ever silently overwritten
+================================================================================

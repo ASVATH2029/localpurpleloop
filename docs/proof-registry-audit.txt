@@ -1,0 +1,24 @@
+﻿v1   round 0   [bootstrap] promoted  ok       held_out_recall=   n/a suite_recall= 1.000 benign_fpr= 0.010 :: first version: suite recall 1.000 at calibrated benign FPR 0.0100, within budget
+v2   round 1   [retrained] promoted  ok       held_out_recall= 0.000 suite_recall= 1.000 benign_fpr= 0.010 :: no regression on either axis (suite recall 1.000 -> 1.000, suite FPR 0.0050 -> 0.0088, calibrated FPR 0.0100)
+v3   round 2   [retrained] promoted  ok       held_out_recall= 1.000 suite_recall= 1.000 benign_fpr= 0.010 :: no regression on either axis (suite recall 1.000 -> 1.000, suite FPR 0.0088 -> 0.0050, calibrated FPR 0.0100)
+v4   round 3   [retrained] promoted  ok       held_out_recall= 1.000 suite_recall= 1.000 benign_fpr= 0.010 :: no regression on either axis (suite recall 1.000 -> 1.000, suite FPR 0.0088 -> 0.0138, calibrated FPR 0.0100)
+v5   round 4   [retrained] promoted  ok       held_out_recall= 1.000 suite_recall= 1.000 benign_fpr= 0.010 :: no regression on either axis (suite recall 1.000 -> 1.000, suite FPR 0.0200 -> 0.0075, calibrated FPR 0.0100)
+v6   round 5   [retrained] promoted  ok       held_out_recall= 1.000 suite_recall= 1.000 benign_fpr= 0.010 :: no regression on either axis (suite recall 1.000 -> 1.000, suite FPR 0.0075 -> 0.0088, calibrated FPR 0.0100)
+v7   round 6   [retrained] promoted  ok       held_out_recall= 1.000 suite_recall= 1.000 benign_fpr= 0.010 :: no regression on either axis (suite recall 1.000 -> 1.000, suite FPR 0.0125 -> 0.0100, calibrated FPR 0.0100)
+v8   round 7   [retrained] promoted  ok       held_out_recall= 1.000 suite_recall= 1.000 benign_fpr= 0.010 :: no regression on either axis (suite recall 1.000 -> 1.000, suite FPR 0.0100 -> 0.0075, calibrated FPR 0.0100)
+v9   round 7   [aggressive_threshold] rejected  REJECTED held_out_recall=   n/a suite_recall= 1.000 benign_fpr= 0.100 :: governance test (10x FPR budget): calibrated benign FPR 0.1000 breaches the 0.0100 budget (+0.0020 slack); active version kept
+v10  round 8   [retrained] promoted  ok       held_out_recall= 1.000 suite_recall= 1.000 benign_fpr= 0.010 :: no regression on either axis (suite recall 1.000 -> 1.000, suite FPR 0.0150 -> 0.0187, calibrated FPR 0.0100)
+v11  round 9   [retrained] promoted  ok       held_out_recall= 1.000 suite_recall= 1.000 benign_fpr= 0.010 :: no regression on either axis (suite recall 1.000 -> 1.000, suite FPR 0.0125 -> 0.0112, calibrated FPR 0.0100)
+v12  round 10  [retrained] promoted  ok       held_out_recall= 1.000 suite_recall= 1.000 benign_fpr= 0.010 :: no regression on either axis (suite recall 1.000 -> 1.000, suite FPR 0.0100 -> 0.0075, calibrated FPR 0.0100)
+v13  round 11  [retrained] promoted  ok       held_out_recall= 1.000 suite_recall= 1.000 benign_fpr= 0.010 :: no regression on either axis (suite recall 1.000 -> 1.000, suite FPR 0.0125 -> 0.0112, calibrated FPR 0.0100)
+v14  round 12  [retrained] promoted  ok       held_out_recall= 1.000 suite_recall= 1.000 benign_fpr= 0.010 :: no regression on either axis (suite recall 1.000 -> 1.000, suite FPR 0.0063 -> 0.0075, calibrated FPR 0.0100)
+v15  round 13  [retrained] promoted  ok       held_out_recall= 1.000 suite_recall= 1.000 benign_fpr= 0.010 :: no regression on either axis (suite recall 1.000 -> 1.000, suite FPR 0.0225 -> 0.0163, calibrated FPR 0.0100)
+v16  round 14  [retrained] promoted  ok       held_out_recall= 1.000 suite_recall= 1.000 benign_fpr= 0.010 :: no regression on either axis (suite recall 1.000 -> 1.000, suite FPR 0.0112 -> 0.0025, calibrated FPR 0.0100)
+v17  round 15  [retrained] promoted  ok       held_out_recall= 1.000 suite_recall= 1.000 benign_fpr= 0.010 :: no regression on either axis (suite recall 1.000 -> 1.000, suite FPR 0.0088 -> 0.0100, calibrated FPR 0.0100)
+v18  round 16  [retrained] promoted  ok       held_out_recall= 1.000 suite_recall= 1.000 benign_fpr= 0.010 :: no regression on either axis (suite recall 1.000 -> 1.000, suite FPR 0.0100 -> 0.0138, calibrated FPR 0.0100)
+v19  round 17  [retrained] promoted  ok       held_out_recall= 1.000 suite_recall= 1.000 benign_fpr= 0.010 :: no regression on either axis (suite recall 1.000 -> 1.000, suite FPR 0.0100 -> 0.0063, calibrated FPR 0.0100)
+v20  round 18  [retrained] promoted  ok       held_out_recall= 1.000 suite_recall= 1.000 benign_fpr= 0.010 :: no regression on either axis (suite recall 1.000 -> 1.000, suite FPR 0.0063 -> 0.0112, calibrated FPR 0.0100)
+v21  round 19  [retrained] promoted  ok       held_out_recall= 1.000 suite_recall= 1.000 benign_fpr= 0.010 :: no regression on either axis (suite recall 1.000 -> 1.000, suite FPR 0.0075 -> 0.0100, calibrated FPR 0.0100)
+v22  round 20  [retrained] promoted  ACTIVE   held_out_recall= 1.000 suite_recall= 1.000 benign_fpr= 0.010 :: no regression on either axis (suite recall 1.000 -> 1.000, suite FPR 0.0100 -> 0.0125, calibrated FPR 0.0100)
+
+ACTIVE: v22 from round 20 threshold=0.0559

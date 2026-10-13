@@ -1,0 +1,12 @@
+﻿============================= test session starts =============================
+platform win32 -- Python 3.12.10, pytest-9.1.1, pluggy-1.6.0
+rootdir: E:\Projects\purple-loop
+configfile: pytest.ini
+collected 60 items
+
+tests\test_corpus_policy_loop.py ..............                          [ 23%]
+tests\test_gen_and_features.py ......................                    [ 60%]
+tests\test_no_leakage.py ........                                        [ 73%]
+tests\test_registry_and_gate.py ................                         [100%]
+
+============================= 60 passed in 15.00s =============================
