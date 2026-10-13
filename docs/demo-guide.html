@@ -1,0 +1,533 @@
+<title>Purple Loop Demo Guide</title>
+<style>
+  /* layout: sticky sidebar nav + main content scroll, stacked on mobile */
+  :root {
+    --bg: #0f1117;
+    --surface: #181c25;
+    --surface2: #1e2330;
+    --border: #2a3045;
+    --fg: #e4e8f0;
+    --fg2: #8b95b0;
+    --accent: #4f8ef7;
+    --accent2: #7c5cfc;
+    --green: #3ecf8e;
+    --red: #f76f6f;
+    --yellow: #f7c44f;
+    --mono: 'JetBrains Mono', 'Fira Mono', 'Courier New', monospace;
+    color-scheme: dark;
+  }
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+      --bg: #f4f6fb;
+      --surface: #ffffff;
+      --surface2: #eef1f8;
+      --border: #d0d7e8;
+      --fg: #1a1f2e;
+      --fg2: #5a6480;
+      --accent: #2f6de0;
+      --accent2: #6041d4;
+      --green: #1a9e62;
+      --red: #d63c3c;
+      --yellow: #c68a00;
+      color-scheme: light;
+    }
+  }
+  :root[data-theme="light"] {
+    --bg: #f4f6fb; --surface: #ffffff; --surface2: #eef1f8; --border: #d0d7e8;
+    --fg: #1a1f2e; --fg2: #5a6480; --accent: #2f6de0; --accent2: #6041d4;
+    --green: #1a9e62; --red: #d63c3c; --yellow: #c68a00; color-scheme: light;
+  }
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg); color: var(--fg);
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 15px; line-height: 1.65;
+    margin: 0; display: flex; min-height: 100%;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* SIDEBAR */
+  #sidebar {
+    width: 230px; min-width: 230px;
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    padding: 28px 0 40px;
+    position: sticky; top: 0; height: 100vh;
+    overflow-y: auto; flex-shrink: 0;
+  }
+  #sidebar .logo {
+    padding: 0 20px 20px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 16px;
+  }
+  #sidebar .logo h1 {
+    font-size: 14px; font-weight: 700; letter-spacing: .08em;
+    text-transform: uppercase; color: var(--accent);
+    margin: 0 0 2px;
+  }
+  #sidebar .logo p { font-size: 11px; color: var(--fg2); margin: 0; }
+  #sidebar nav a {
+    display: block; padding: 6px 20px;
+    font-size: 12.5px; color: var(--fg2);
+    border-left: 2px solid transparent;
+    transition: color .15s, border-color .15s;
+  }
+  #sidebar nav a:hover, #sidebar nav a.active {
+    color: var(--fg); border-left-color: var(--accent); text-decoration: none;
+  }
+  #sidebar nav .section-label {
+    padding: 16px 20px 4px;
+    font-size: 10px; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--fg2); font-weight: 600;
+  }
+
+  /* MAIN */
+  #main {
+    flex: 1; padding: 40px 40px 80px;
+    max-width: 860px; min-width: 0;
+  }
+  section { margin-bottom: 56px; scroll-margin-top: 24px; }
+  section h2 {
+    font-size: 22px; font-weight: 700; margin: 0 0 6px;
+    padding-bottom: 10px; border-bottom: 1px solid var(--border);
+    text-wrap: balance;
+  }
+  section h3 {
+    font-size: 15px; font-weight: 600; margin: 24px 0 8px;
+    color: var(--accent);
+  }
+  p { margin: 0 0 12px; }
+  ul, ol { margin: 0 0 12px; padding-left: 20px; }
+  li { margin-bottom: 4px; }
+
+  /* TABLES */
+  .table-wrap { overflow-x: auto; margin: 12px 0 20px; }
+  table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  th {
+    background: var(--surface2); color: var(--fg2);
+    text-transform: uppercase; font-size: 11px; letter-spacing: .06em;
+    padding: 8px 12px; text-align: left; border-bottom: 1px solid var(--border);
+  }
+  td { padding: 9px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: var(--surface2); }
+
+  /* CODE / MONO */
+  code {
+    font-family: var(--mono); font-size: 12.5px;
+    background: var(--surface2); border: 1px solid var(--border);
+    padding: 1px 6px; border-radius: 4px; color: var(--accent2);
+  }
+  pre {
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 8px; padding: 16px; overflow-x: auto;
+    font-family: var(--mono); font-size: 12.5px; line-height: 1.6;
+    margin: 12px 0 20px; color: var(--fg);
+  }
+  pre code { background: none; border: none; padding: 0; color: inherit; }
+
+  /* CHIPS / BADGES */
+  .badge {
+    display: inline-block; padding: 2px 8px; border-radius: 12px;
+    font-size: 11px; font-weight: 600; letter-spacing: .04em;
+  }
+  .badge-green { background: color-mix(in srgb, var(--green) 15%, transparent); color: var(--green); }
+  .badge-red { background: color-mix(in srgb, var(--red) 15%, transparent); color: var(--red); }
+  .badge-yellow { background: color-mix(in srgb, var(--yellow) 15%, transparent); color: var(--yellow); }
+  .badge-blue { background: color-mix(in srgb, var(--accent) 15%, transparent); color: var(--accent); }
+
+  /* CALLOUT BOXES */
+  .callout {
+    border-left: 3px solid var(--accent);
+    background: color-mix(in srgb, var(--accent) 8%, var(--surface));
+    border-radius: 0 8px 8px 0; padding: 12px 16px; margin: 12px 0 20px;
+  }
+  .callout.warn { border-color: var(--yellow); background: color-mix(in srgb, var(--yellow) 8%, var(--surface)); }
+  .callout.good { border-color: var(--green); background: color-mix(in srgb, var(--green) 8%, var(--surface)); }
+  .callout p { margin: 0; font-size: 13.5px; }
+  .callout strong { color: var(--fg); }
+
+  /* RESULT NUMBERS */
+  .metrics { display: flex; flex-wrap: wrap; gap: 14px; margin: 16px 0 24px; }
+  .metric {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 10px; padding: 14px 20px; flex: 1; min-width: 140px;
+  }
+  .metric .val {
+    font-size: 26px; font-weight: 700; font-variant-numeric: tabular-nums;
+    color: var(--accent); line-height: 1.1; margin-bottom: 4px;
+  }
+  .metric .lbl { font-size: 11.5px; color: var(--fg2); }
+
+  /* STEP FLOW */
+  .steps { display: flex; flex-direction: column; gap: 0; margin: 12px 0 24px; }
+  .step { display: flex; gap: 16px; align-items: flex-start; position: relative; }
+  .step::before {
+    content: ''; position: absolute; left: 17px; top: 36px;
+    width: 2px; bottom: -8px; background: var(--border);
+  }
+  .step:last-child::before { display: none; }
+  .step-num {
+    width: 36px; height: 36px; min-width: 36px;
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 700; color: var(--accent);
+  }
+  .step-body { padding: 6px 0 20px; }
+  .step-body strong { display: block; margin-bottom: 2px; }
+  .step-body p { margin: 0; font-size: 13.5px; color: var(--fg2); }
+
+  /* Q&A accordion */
+  details { border: 1px solid var(--border); border-radius: 8px; margin-bottom: 10px; }
+  details + details { margin-top: 0; }
+  summary {
+    padding: 13px 16px; cursor: pointer; font-weight: 600; font-size: 14px;
+    list-style: none; display: flex; justify-content: space-between; align-items: center;
+  }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: '+'; color: var(--fg2); font-size: 18px; transition: transform .2s; }
+  details[open] summary::after { content: '−'; }
+  details[open] summary { border-bottom: 1px solid var(--border); }
+  .details-body { padding: 14px 16px; font-size: 13.5px; color: var(--fg2); }
+  .details-body p { margin: 0 0 8px; }
+  .details-body p:last-child { margin: 0; }
+
+  /* THEME TOGGLE */
+  #toggle {
+    position: fixed; bottom: 20px; right: 20px;
+    background: var(--surface); border: 1px solid var(--border);
+    color: var(--fg2); padding: 7px 13px; border-radius: 20px;
+    font-size: 12px; cursor: pointer; z-index: 100;
+  }
+  #toggle:hover { color: var(--fg); }
+
+  @media (max-width: 700px) {
+    body { flex-direction: column; }
+    #sidebar { width: 100%; min-width: 0; height: auto; position: static; border-right: none; border-bottom: 1px solid var(--border); padding: 16px 0; }
+    #sidebar nav { display: flex; flex-wrap: wrap; gap: 2px; padding: 0 12px; }
+    #sidebar nav a { padding: 5px 10px; border-left: none; border-radius: 6px; }
+    #sidebar nav .section-label { display: none; }
+    #main { padding: 24px 16px 60px; }
+  }
+</style>
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
+
+<div id="sidebar">
+  <div class="logo">
+    <h1>Purple Loop</h1>
+    <p>Demo Defense Guide</p>
+  </div>
+  <nav>
+    <div class="section-label">Overview</div>
+    <a href="#what">What is this?</a>
+    <a href="#structure">Project structure</a>
+    <a href="#round">One round, step by step</a>
+    <div class="section-label">Attacks</div>
+    <a href="#attacks">3 attack families</a>
+    <a href="#knobs">4 mutation knobs</a>
+    <a href="#benign">Hard negatives</a>
+    <div class="section-label">Proof</div>
+    <a href="#results">Results & numbers</a>
+    <a href="#tests">What tests prove</a>
+    <a href="#governance">Governance trail</a>
+    <div class="section-label">Defence</div>
+    <a href="#qna">Likely questions</a>
+    <a href="#limits">Honest limits</a>
+  </nav>
+</div>
+
+<div id="main">
+
+  <section id="what">
+    <h2>What is this project?</h2>
+    <p>A <strong>self-improving attack detector</strong> that runs entirely on your laptop. It generates fake cloud attack events, tests whether the current detector can catch them, retrains itself on what it saw, and keeps score — all without touching any real AWS account, credentials, or the internet.</p>
+    <div class="callout good">
+      <p><strong>One-line pitch:</strong> Traditional detectors are written once and go stale. Purple Loop writes itself, governed by rules that prevent it making things worse.</p>
+    </div>
+    <p>The "purple" in the name is standard security language: <em>red team</em> attacks, <em>blue team</em> defends, <em>purple team</em> does both at once in a loop.</p>
+  </section>
+
+  <section id="structure">
+    <h2>Project structure</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Folder / file</th><th>What it does</th><th>Who wrote it</th></tr></thead>
+        <tbody>
+          <tr><td><code>config.yaml</code></td><td>Every tunable number. Rounds, seed, FPR budget, injection round. Nothing is hardcoded in source.</td><td>CS</td></tr>
+          <tr><td><code>purpleloop/schema.py</code></td><td>Frozen contracts. The list of API calls, attack families, knob values. Single source of truth — all modules import from here.</td><td>CA</td></tr>
+          <tr><td><code>purpleloop/gen/attacks.py</code></td><td>Generates synthetic attack sessions for all 3 families, applying the 4 mutation knobs.</td><td>CA</td></tr>
+          <tr><td><code>purpleloop/gen/benign.py</code></td><td>Generates innocent traffic, including 4 hard negatives designed to look like attacks.</td><td>CS</td></tr>
+          <tr><td><code>purpleloop/features/extract.py</code></td><td>Turns a session (events) into 67 numbers the ML model can read. No raw event names leak in.</td><td>ML1</td></tr>
+          <tr><td><code>purpleloop/model/detector.py</code></td><td>Trains and scores the RandomForest detector.</td><td>ML1</td></tr>
+          <tr><td><code>purpleloop/model/calibrate.py</code></td><td>Sets the alert threshold so false positives stay ≤ 1%.</td><td>ML1</td></tr>
+          <tr><td><code>purpleloop/harness/heldout.py</code></td><td>Scores a new variant <em>before</em> it enters training. Asserts and crashes if you try to cheat.</td><td>ML1</td></tr>
+          <tr><td><code>purpleloop/corpus.py</code></td><td>Append-only store for every round's data. Cannot overwrite a previous round.</td><td>CS</td></tr>
+          <tr><td><code>purpleloop/registry/gate.py</code></td><td>Decides whether a newly trained model is better enough to replace the active one.</td><td>ML2</td></tr>
+          <tr><td><code>purpleloop/registry/registry.py</code></td><td>SQLite ledger of every model version. Every row is permanent; rollback = flip a flag.</td><td>ML2</td></tr>
+          <tr><td><code>purpleloop/orchestrator/policy.py</code></td><td>Watches which attack styles keep being missed. Biases the next round toward those.</td><td>ML2</td></tr>
+          <tr><td><code>purpleloop/orchestrator/run.py</code></td><td>The main loop. Runs the 9 steps in order every round.</td><td>ML2</td></tr>
+          <tr><td><code>purpleloop/ablation.py</code></td><td>Compares delivery features vs technique features — which set actually drives detection?</td><td>ML1</td></tr>
+          <tr><td><code>tests/</code></td><td>60 tests. The critical ones prove the detector cannot cheat by seeing data before scoring it.</td><td>All</td></tr>
+          <tr><td><code>Dockerfile</code></td><td>Runs the whole thing inside a container with zero network access (<code>--network none</code>).</td><td>CS</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="round">
+    <h2>One round, step by step</h2>
+    <p>The order is enforced in code — steps 3 and 4 cannot be swapped.</p>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div class="step-body"><strong>Pick a variant</strong><p>The policy looks at past misses and picks an attack style the detector has struggled with. First 2 rounds explore freely.</p></div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-body"><strong>Generate events</strong><p>Synthetic CloudTrail-shaped records for that variant, plus fresh benign traffic for the same simulated day.</p></div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-body"><strong>Score held-out <span class="badge badge-red">critical</span></strong><p>Run the <em>current</em> model against this brand-new variant. Measurement happens <strong>before</strong> it enters training. The harness raises an exception if you try to cheat.</p></div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-body"><strong>Append to corpus</strong><p>Only now does the variant enter the training set. Corpus is append-only — no round can be modified later.</p></div></div>
+      <div class="step"><div class="step-num">5</div><div class="step-body"><strong>Retrain</strong><p>A fresh RandomForest is trained on the entire corpus — all rounds so far, all families.</p></div></div>
+      <div class="step"><div class="step-num">6</div><div class="step-body"><strong>Recalibrate threshold</strong><p>Set the alert cutoff at the highest value that keeps benign FPR ≤ 1%.</p></div></div>
+      <div class="step"><div class="step-num">7</div><div class="step-body"><strong>Regression suite</strong><p>Run the candidate on all previously seen variants. Did we forget anything we used to catch?</p></div></div>
+      <div class="step"><div class="step-num">8</div><div class="step-body"><strong>Gate <span class="badge badge-yellow">governance</span></strong><p>Promote only if recall didn't drop AND false positives didn't rise on an identical fresh sample. Otherwise log a reject and keep the old model.</p></div></div>
+      <div class="step"><div class="step-num">9</div><div class="step-body"><strong>Update policy</strong><p>Attribute misses to their knob value. Update the smoothed miss-rate table so round N+1 targets the right weakness.</p></div></div>
+    </div>
+  </section>
+
+  <section id="attacks">
+    <h2>3 attack families</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Family</th><th>What the attacker does</th><th>Goal</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>IAM Escalation</strong></td>
+            <td><code>CreateUser</code> → <code>AttachUserPolicy(AdministratorAccess)</code> → optionally <code>CreateAccessKey</code></td>
+            <td>Create a persistent backdoor with full AWS control</td>
+          </tr>
+          <tr>
+            <td><strong>S3 Exfiltration</strong></td>
+            <td>Flood of <code>GetObject</code> calls on sensitive buckets (<code>finance-reports</code>, <code>hr-data</code>, <code>customer-pii</code>)</td>
+            <td>Steal bulk data before anyone notices</td>
+          </tr>
+          <tr>
+            <td><strong>CloudTrail Tampering</strong></td>
+            <td><code>StopLogging</code>, <code>DeleteTrail</code>, or <code>PutEventSelectors</code> narrowing audit scope</td>
+            <td>Cover tracks so subsequent activity leaves no audit trail</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="knobs">
+    <h2>4 mutation knobs — what the attacker changes</h2>
+    <p>The <em>technique</em> (which APIs, which buckets) stays the same. What changes is <em>how</em> the attack is delivered to evade the detector.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Knob</th><th>Values</th><th>What the attacker is doing</th></tr></thead>
+        <tbody>
+          <tr><td><code>delay_profile</code></td><td>burst / fast / spaced / slow / jittered</td><td>Slow down or randomise timing so it doesn't look automated</td></tr>
+          <tr><td><code>batch_size</code></td><td>small / medium / large</td><td>Break the attack into fewer or more API calls per chunk</td></tr>
+          <tr><td><code>call_order</code></td><td>canonical / reversed / interleaved / split</td><td>Mix attack calls with innocent filler or do them out of expected order</td></tr>
+          <tr><td><code>identity_reuse</code></td><td>single / two_identities / per_call_identity</td><td>Use different AWS identities per call so no one identity looks suspicious</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout">
+      <p><strong>540 possible combinations</strong> across 3 families × 4 knobs. A 20-round run visits 20 of them — plus the 6 hand-authored seed variants = 26 total seen.</p>
+    </div>
+  </section>
+
+  <section id="benign">
+    <h2>Hard negatives — why the 1% FPR actually means something</h2>
+    <p>If benign traffic looks nothing like attacks, any detector scores 0% FPR trivially. These four benign types are designed to look like attacks along one axis:</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Benign kind</th><th>Looks like</th><th>Differs by</th></tr></thead>
+        <tbody>
+          <tr><td><code>user_onboarding</code></td><td>IAM escalation — same CreateUser + AttachUserPolicy calls</td><td>Grants <code>ReadOnlyAccess</code>, not <code>AdministratorAccess</code></td></tr>
+          <tr><td><code>backup_job</code></td><td>S3 exfiltration — high volume GetObject</td><td>Reads a non-sensitive bucket</td></tr>
+          <tr><td><code>analyst_sensitive_query</code></td><td>S3 exfiltration — sensitive bucket accessed</td><td>Only a handful of objects, not bulk</td></tr>
+          <tr><td><code>log_maintenance</code></td><td>CloudTrail tampering — same PutEventSelectors call</td><td>Broadens audit scope (adds coverage) instead of narrowing it</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="results">
+    <h2>Results from the committed run</h2>
+    <div class="metrics">
+      <div class="metric"><div class="val">60/60</div><div class="lbl">Tests passing</div></div>
+      <div class="metric"><div class="val">0.95</div><div class="lbl">Mean held-out recall (20 rounds)</div></div>
+      <div class="metric"><div class="val">0.0100</div><div class="lbl">Benign FPR every round (budget 1%)</div></div>
+      <div class="metric"><div class="val">22 ver</div><div class="lbl">Registry entries, 1 rejected</div></div>
+      <div class="metric"><div class="val">~100s</div><div class="lbl">Total wall-clock time, 20 rounds</div></div>
+    </div>
+    <h3>The generalization curve</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Rounds</th><th>Mean held-out recall</th></tr></thead>
+        <tbody>
+          <tr><td>Rounds 1–5</td><td><strong>0.800</strong></td></tr>
+          <tr><td>Rounds 6–10</td><td><strong>1.000</strong></td></tr>
+          <tr><td>Rounds 11–20</td><td><strong>1.000</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout warn">
+      <p><strong>Be honest about this:</strong> Only 1 of 20 rounds was missed (round 1: <code>cloudtrail_tampering</code> + <code>delay=slow</code> + <code>order=split</code>). After one example of that style, all 19 later variants were caught. This is not a gradual 20-point learning curve — it's one early miss followed by saturation.</p>
+    </div>
+    <h3>The governance reject (v9)</h3>
+    <pre><code>v9  round 7  [aggressive_threshold]  REJECTED
+    calibrated benign FPR 0.1000 breaches the 0.0100 budget
+    → active version (v8) kept automatically</code></pre>
+    <p>v9 would have caught every attack, but with 10× the allowed false alarm rate. The gate refused it automatically.</p>
+  </section>
+
+  <section id="tests">
+    <h2>What the 60 tests prove</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Test file</th><th>What it proves</th><th>Why it matters</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><code>test_no_leakage.py</code> (8 tests)</td>
+            <td>Features never include metadata like <code>variant_id</code>. <code>heldout_eval()</code> raises an exception if the variant is already in the corpus.</td>
+            <td><strong>The headline number is honest.</strong> Without this, the detector could cheat by memorising the variant ID — recall would show 1.000 for the wrong reason.</td>
+          </tr>
+          <tr>
+            <td><code>test_registry_and_gate.py</code> (16 tests)</td>
+            <td>Promotion, rejection, rollback, and the gate's two conditions all behave correctly.</td>
+            <td>Proves the governance isn't just for show — it actually blocks bad models.</td>
+          </tr>
+          <tr>
+            <td><code>test_gen_and_features.py</code> (22 tests)</td>
+            <td>Hard negatives behave as intended. Attack generators produce correct event shapes. Feature extractor is deterministic.</td>
+            <td>Proves the FPR budget is meaningful — benign traffic genuinely overlaps with attacks.</td>
+          </tr>
+          <tr>
+            <td><code>test_corpus_policy_loop.py</code> (14 tests)</td>
+            <td>Corpus is append-only. Policy self-corrects. 2-round end-to-end integration. Kill-switch works.</td>
+            <td>Proves the loop machinery runs correctly from end to end, not just unit by unit.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="governance">
+    <h2>Governance — the full audit trail</h2>
+    <p>Every candidate model gets a row in <code>data/registry.db</code>. Nothing is ever deleted or overwritten. The trail from this run:</p>
+    <pre><code>v1   round 0   [bootstrap]            promoted  ✓  seed detector
+v2   round 1   [retrained]            promoted  ✓  (first real round — recall 0.000 on held-out)
+v3–v8          [retrained]            promoted  ✓  rounds 2–7, all recall 1.000
+v9   round 7   [aggressive_threshold] REJECTED  ✗  FPR 0.1000 > 0.0100 budget
+v10–v22        [retrained]            promoted  ✓  rounds 8–20
+─────────────────────────────────────────────────────────────────
+ACTIVE: v22   threshold=0.0559</code></pre>
+    <p>Rollback is just flipping a flag: <code>purpleloop rollback --to-version 5</code> makes v5 active again with no data loss.</p>
+  </section>
+
+  <section id="qna">
+    <h2>Likely questions during the demo</h2>
+
+    <details>
+      <summary>Why don't you use real AWS data?</summary>
+      <div class="details-body">
+        <p>Two reasons. First, real CloudTrail logs contain PII and credentials — we can't share them in a demo or a repo. Second, synthetic data lets us control exactly what attack variants exist and measure generalization precisely. The events are shaped exactly like CloudTrail records (same field names, same API call vocabulary), so the feature engineering transfers.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>How do you know the detector isn't cheating?</summary>
+      <div class="details-body">
+        <p>Two mechanisms. First, features never include raw event names or <code>variant_id</code> — the extractor only computes statistics (counts, timing, fractions). Second, <code>heldout_eval()</code> in <code>harness/heldout.py</code> calls <code>assert_unseen()</code> which raises an <code>AssertionError</code> if the variant is already in the corpus. It's not a warning — it crashes. And <code>test_no_leakage.py</code> tests this assertion directly.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>What is the FPR budget and why 1%?</summary>
+      <div class="details-body">
+        <p>FPR = false positive rate = the fraction of innocent sessions that get flagged as attacks. 1% means: for every 100 normal employees doing normal work, at most 1 gets a false alert. That's a standard SOC threshold — above ~2% and analysts start ignoring alerts entirely. The budget is enforced in two ways: threshold calibration sets the cutoff so benign FPR ≤ 1%, and the gate rejects any candidate whose FPR exceeds budget even if its recall is perfect.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>The curve saturates after one round — is that a failure?</summary>
+      <div class="details-body">
+        <p>It's an honest result, not a failure. It means the synthetic attack distribution is separable from benign traffic from session shape alone — the timing and ordering mutations aren't enough to fool the detector once it has one slow-timing example. We documented this upfront in <code>docs/RESULTS.md</code> and listed four concrete changes that would make the task harder: overlapping benign traffic on all axes, quieter attacks, smaller seed corpus, per-family curves. The loop <em>machinery</em> is correct; the detection <em>problem</em> is too easy to show a gradual climb.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>What is the ablation and what did it find?</summary>
+      <div class="details-body">
+        <p>We ran the same loop three times with different feature subsets: all 67 features, delivery-only (32 timing/ordering features), and technique-only (35 semantic features: admin grants, log narrowing, sensitive reads). The hypothesis was that technique features are what drive generalization. Result: delivery-only scored 0.896 vs 0.906 for the full set — a 0.010 gap — so the claim is <strong>not supported</strong>. Timing and ordering features alone generalise almost as well. We left that result standing rather than re-partitioning features until it flipped.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>What is the adaptive policy actually doing?</summary>
+      <div class="details-body">
+        <p>After each round, it looks at which sessions were missed and records which knob values appeared in those misses. It computes a smoothed miss rate per knob value (using shrinkage — so one noisy round can't dominate) and biases the next variant generation toward the weakest value. For example: round 1 missed <code>delay=slow</code> at 100%. Policy pinned to <code>delay=slow</code> for several rounds. Once the detector caught those variants reliably, the miss rate fell and the policy moved on to the next weakness.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>Why can't you just push --force to fix a bad model?</summary>
+      <div class="details-body">
+        <p>The registry is designed to make that impossible silently. Every candidate gets a row; the only write is <code>INSERT</code>, never <code>UPDATE</code> or <code>DELETE</code>. To "revert", you flip the <code>promoted</code> flag on a previous row — but the bad candidate's row stays in the audit trail with its reason. The governance gate exists precisely because a model can have better recall and worse FPR at the same time; without a gate, the loop would auto-upgrade to a noisier detector.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>Could this work on real CloudTrail logs?</summary>
+      <div class="details-body">
+        <p>The feature engineering would transfer directly — same field names, same API vocabulary. The main differences: real logs have class imbalance (attacks are rare), real benign traffic is far more diverse, and real attackers don't come from a known knob space. So the generalisation claim would need re-validation. The loop architecture (held-out scoring, governed promotion, append-only corpus, adaptive policy) is equally applicable to real data. The four changes in <code>docs/RESULTS.md §6</code> are also the right steps toward real-data readiness.</p>
+      </div>
+    </details>
+  </section>
+
+  <section id="limits">
+    <h2>Honest limitations — say these first</h2>
+    <ul>
+      <li><strong>Synthetic events.</strong> Shaped like CloudTrail but generated in-process. No claim transfers to real logs without re-validation.</li>
+      <li><strong>Curve saturates.</strong> One early miss followed by 19 clean rounds is not a gradual learning curve with 20 informative points.</li>
+      <li><strong>Ablation negative.</strong> Delivery-only features score nearly as well as the full set — the technique features are not proven to be what drives generalization.</li>
+      <li><strong>Session-level detection.</strong> One <code>session_id</code> = one episode. A real attacker spreading activity across sessions and days needs a different unit of analysis.</li>
+      <li><strong>Sensitivity is declared, not learned.</strong> The feature extractor knows which buckets are sensitive from a lexicon. Realistic, but it's domain knowledge handed to the model.</li>
+      <li><strong>20 rounds, single seed.</strong> No confidence intervals. One run is enough to show the mechanism, not enough to make the trend statistically meaningful.</li>
+    </ul>
+    <div class="callout good">
+      <p><strong>Finishing on real limitations is stronger than overclaiming.</strong> The loop is autonomous, the measurement is honest, false positives stayed inside budget, and the self-updating is governed. That's what this run establishes.</p>
+    </div>
+  </section>
+
+</div>
+
+<button id="toggle">☀ Light</button>
+<script>
+  const toggle = document.getElementById('toggle');
+  let dark = true;
+  try { dark = localStorage.getItem('pl-theme') !== 'light'; } catch(e){}
+  function applyTheme(d) {
+    document.documentElement.dataset.theme = d ? 'dark' : 'light';
+    toggle.textContent = d ? '☀ Light' : '☾ Dark';
+    try { localStorage.setItem('pl-theme', d ? 'dark' : 'light'); } catch(e){}
+  }
+  applyTheme(dark);
+  toggle.addEventListener('click', () => { dark = !dark; applyTheme(dark); });
+
+  // Active nav link on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const links = document.querySelectorAll('#sidebar nav a');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        const a = document.querySelector('#sidebar nav a[href="#' + e.target.id + '"]');
+        if (a) a.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+  sections.forEach(s => obs.observe(s));
+</script>
