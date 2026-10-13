@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.venv/
+venv/
+
+# Generated run artifacts. The loop regenerates all of this from config.yaml
+# plus the seed, so none of it belongs in git -- the trained forests alone are
+# ~80 MB per 20-round run.
+data/
+logs/
+ablation/
+docs/figures/
+
+# the kill switch
+STOP
+
+# OS
+Thumbs.db
+.DS_Store

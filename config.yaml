@@ -1,0 +1,44 @@
+# Purple Loop - run configuration
+# Every tunable lives here, so no number is hand-picked inside the code.
+
+run:
+  rounds: 20                 # hard scope cap (plan: 15-20)
+  seed: 20251013
+  max_events_per_round: 6000 # bound each round's work
+  sleep_between_rounds_s: 0  # set >0 to watch it run live
+
+corpus:
+  benign_sessions_per_round: 140
+  attack_sessions_per_round: 8      # instances of the new held-out variant
+  calibration_benign_sessions: 800  # fresh benign, never trained on
+  suite_benign_sessions: 800        # fresh benign for the promotion gate
+  suite_instances_per_variant: 4    # regression suite re-rolls old variants
+
+detector:
+  model: random_forest       # random_forest | logistic_regression
+  n_estimators: 300
+  max_depth: null
+  min_samples_leaf: 2
+  class_weight: balanced
+  use_isolation_forest: true # unsupervised 2nd line of defence (reported, not gating)
+
+threshold:
+  fpr_budget: 0.01           # benign false-positive budget (1%)
+
+governance:
+  # A candidate is promoted only if it beats the active version on BOTH
+  # suite recall and benign FPR (within tolerance). Otherwise: logged + rejected.
+  recall_tolerance: 0.0      # candidate suite recall must be >= active - tolerance
+  fpr_tolerance: 0.01        # candidate suite FPR must be <= active + tolerance
+                             # (loose enough to absorb benign sampling noise)
+  budget_tolerance: 0.002    # slack on the absolute FPR budget check
+  # Governance test: at this round, also propose a deliberately over-aggressive
+  # threshold (10x the FPR budget) so the gate is seen rejecting something.
+  inject_aggressive_candidate_round: 7
+  aggressive_fpr_multiplier: 10.0
+
+policy:
+  # Mutation policy: bias the next round's knobs toward the dimension where the
+  # previous round's misses clustered. epsilon = chance of ignoring the bias.
+  epsilon: 0.2
+  seed_rounds: 2             # the first N rounds stay in the narrow seed knob space
