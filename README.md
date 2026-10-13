@@ -1,4 +1,4 @@
-# logalpurpleloop — Autonomous Governed Self-Training Detection Loop
+# localpurpleloop — Autonomous Governed Self-Training Detection Loop
 
 > A detection system that attacks itself, learns from what it misses, and is governed by rules that prevent it from getting worse while doing it.
 
